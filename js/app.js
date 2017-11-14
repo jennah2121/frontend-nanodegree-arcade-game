@@ -28,6 +28,53 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function(){
+  this.sprite = 'images/char-boy.png';
+  this.x = 200;
+  this.y = 420;
+};
+
+Player.prototype.update = function(dt) {
+  //prevent player from exiting game board
+  if(this.x <= -10) {
+    this.x = -10;
+  }
+
+  if(this.x >= 410) {
+    this.x = 410;
+  }
+
+  if(this.y >= 430) {
+    this.y = 430;
+  }
+
+  if(this.y <= -10) {
+    this.y = -10;
+  }
+};
+
+Player.prototype.handleInput = function(key) {
+  switch(key){
+    case "up":
+      this.y -= 10;
+      break;
+    case "down":
+      this.y += 10;
+      break;
+    case "left":
+      this.x -= 10;
+      break;
+    case "right":
+      this.x += 10;
+      break;
+  }
+
+};
+
+Player.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
 
 
 // Now instantiate your objects.
@@ -41,6 +88,7 @@ for(var i = 0, yVal = 50; i < 3; i++, yVal+=90) {
   allEnemies.push(new Enemy(enemyX, enemyY, eSpeed));
 }
 
+var player = new Player();
 
 
 // This listens for key presses and sends the keys to your
