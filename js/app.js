@@ -56,6 +56,7 @@ Player.prototype.update = function(dt) {
 
   if(this.y <= -10) {
     this.y = -10;
+    setTimeout( () => this.reset(), 300);
   }
 };
 
@@ -81,6 +82,10 @@ Player.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.reset = function() {
+  this.x = 200;
+  this.y = 405;
+};
 
 
 // Now instantiate your objects.
