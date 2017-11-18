@@ -37,21 +37,21 @@ Enemy.prototype.render = function() {
 var Player = function(){
   this.sprite = 'images/char-boy.png';
   this.x = 200;
-  this.y = 420;
+  this.y = 405;
 };
 
 Player.prototype.update = function(dt) {
   //prevent player from exiting game board
-  if(this.x <= -10) {
-    this.x = -10;
+  if(this.x <= -20) {
+    this.x = -20;
   }
 
   if(this.x >= 410) {
     this.x = 410;
   }
 
-  if(this.y >= 430) {
-    this.y = 430;
+  if(this.y >= 405) {
+    this.y = 405;
   }
 
   if(this.y <= -10) {
@@ -62,16 +62,16 @@ Player.prototype.update = function(dt) {
 Player.prototype.handleInput = function(key) {
   switch(key){
     case "up":
-      this.y -= 10;
+      this.y -= 85;
       break;
     case "down":
-      this.y += 10;
+      this.y += 85;
       break;
     case "left":
-      this.x -= 10;
+      this.x -= 105;
       break;
     case "right":
-      this.x += 10;
+      this.x += 105;
       break;
   }
 
