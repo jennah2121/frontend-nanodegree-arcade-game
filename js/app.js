@@ -56,6 +56,7 @@ Player.prototype.update = function(dt) {
 
   if(this.y <= -10) {
     this.y = -10;
+    //visually show that the player has reached the water
     setTimeout( () => this.reset(), 300);
   }
 };
@@ -92,7 +93,7 @@ Player.prototype.reset = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-for(var i = 0, yVal = 50; i < 3; i++, yVal+=90) {
+for(var i = 0, yVal = 50; i < 3; i++, yVal+=85) {
   var enemyX = 0;
   var enemyY = yVal;
   var eSpeed = Math.round(Math.random() * (60-20) + 20) * Math.round(Math.random() * (6-2) + 2 );
