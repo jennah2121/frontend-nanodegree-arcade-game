@@ -88,6 +88,18 @@ Player.prototype.reset = function() {
   this.y = 405;
 };
 
+//lives class
+var Life = function(x) {
+  this.sprite = 'images/small-heart.png';
+  this.x = x;
+  this.y = -15;
+};
+
+Life.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -101,6 +113,11 @@ for(var i = 0, yVal = 50; i < 3; i++, yVal+=85) {
 }
 
 var player = new Player();
+
+var allLives = [];
+for(var i = 0, xVal=0; i < 5; i++, xVal+=35) {
+  allLives.push(new Life(xVal));
+}
 
 
 // This listens for key presses and sends the keys to your

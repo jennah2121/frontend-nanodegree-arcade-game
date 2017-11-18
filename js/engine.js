@@ -100,12 +100,13 @@ var Engine = (function(global) {
       allEnemies.forEach(function(enemy) {
         /*
         First check if the player is on the same row as the enemy subtract 15
-        as player y is always 15 greater than enemy y. 
+        as player y is always 15 greater than enemy y.
         Then check if the players x position is within the range of the enemy's x
         */
         if(player.y - 15 == enemy.y) {
           if(player.x <= enemy.x + 50 && player.x >= enemy.x - 50) {
             player.reset();
+            allLives.pop();
           }
         }
       });
@@ -169,6 +170,10 @@ var Engine = (function(global) {
         });
 
         player.render();
+
+        allLives.forEach(function(life) {
+          life.render();
+        });
     }
 
     /* This function does nothing but it could have been a good place to
@@ -188,7 +193,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/small-heart.png'
     ]);
     Resources.onReady(init);
 
