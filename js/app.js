@@ -1,3 +1,5 @@
+var allEnemies, allLives;
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -104,20 +106,23 @@ Life.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [];
-for(var i = 0, yVal = 50; i < 3; i++, yVal+=85) {
-  var enemyX = 0;
-  var enemyY = yVal;
-  var eSpeed = Math.round(Math.random() * (60-20) + 20) * Math.round(Math.random() * (6-2) + 2 );
-  allEnemies.push(new Enemy(enemyX, enemyY, eSpeed));
-}
+//starting state stored in newGame so the game can be reset easily
+var Newgame = function() {
+  allEnemies = [];
+  for(var i = 0, yVal = 50; i < 3; i++, yVal+=85) {
+    var enemyX = 0;
+    var enemyY = yVal;
+    var eSpeed = Math.round(Math.random() * (60-20) + 20) * Math.round(Math.random() * (6-2) + 2 );
+    allEnemies.push(new Enemy(enemyX, enemyY, eSpeed));
+  }
 
-var player = new Player();
+  player = new Player();
 
-var allLives = [];
-for(var i = 0, xVal=0; i < 5; i++, xVal+=35) {
-  allLives.push(new Life(xVal));
-}
+  allLives = [];
+  for(var j = 0, xVal=0; j < 5; j++, xVal+=35) {
+    allLives.push(new Life(xVal));
+  }
+};
 
 
 // This listens for key presses and sends the keys to your
