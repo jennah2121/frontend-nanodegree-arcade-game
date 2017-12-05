@@ -14,6 +14,7 @@ var Enemy = function(x, y, speed) {
 };
 
 Enemy.prototype.update = function(dt) {
+  if(pause.paused == false) {
     // movement multipled by dt to ensure the game runs at the same speed on all computers
     this.x += Math.round(this.speed * dt);
 
@@ -21,7 +22,7 @@ Enemy.prototype.update = function(dt) {
       allEnemies.push(new Enemy(-60, this.y, Math.round(Math.random() * (60-20) + 20) * Math.round(Math.random() * (6-2) + 2 )));
       allEnemies.splice(allEnemies.indexOf(this),1);
     }
-
+  }
 };
 
 Enemy.prototype.render = function() {
@@ -67,22 +68,25 @@ Player.prototype.update = function(dt) {
 Player.prototype.handleInput = function(key) {
   switch(key){
     case "up":
-      this.y -= 85;
+      if(pause.paused == false) { this.y -= 85;}
       break;
     case "down":
-      this.y += 85;
+      if(pause.paused == false) {this.y += 85;}
       break;
     case "left":
-      this.x -= 105;
+      if(pause.paused == false) {this.x -= 105;}
       break;
     case "right":
-      this.x += 105;
+      if(pause.paused == false) {this.x += 105;}
       break;
     case "space":
       Newgame();
       break;
     case "c":
       player.character();
+      break;
+    case "pause":
+      if(pause.paused) {pause.paused = false;} else {pause.paused = true;}
   }
 
 };
@@ -181,6 +185,13 @@ Stars.prototype.update = function() {
   this.y = starY[Math.floor(Math.random() * (3 - 0)) + 0];
 };
 
+/* Pause class
+* Adds the ability to pause the game
+*/
+var Pause = function() {
+  this.paused = false;
+};
+
 // Instantiate objects.
 //starting state stored in newGame so the game can be reset easily
 var Newgame = function() {
@@ -203,6 +214,8 @@ var Newgame = function() {
   currScore = 0;
 
   star = new Stars(200, 155);
+
+  pause = new Pause();
 };
 
 
@@ -215,7 +228,8 @@ document.addEventListener('keyup', function(e) {
         38: 'up',
         39: 'right',
         40: 'down',
-        67: 'c'
+        67: 'c',
+        80: 'pause'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
