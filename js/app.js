@@ -1,4 +1,4 @@
-var allEnemies, allLives, currScore=0, highestScore=0;
+var allEnemies, allLives, currScore=0, highestScore=0, charNum=-1;
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -81,6 +81,8 @@ Player.prototype.handleInput = function(key) {
     case "space":
       Newgame();
       break;
+    case "c":
+      player.character();
   }
 
 };
@@ -92,6 +94,19 @@ Player.prototype.render = function() {
 Player.prototype.reset = function() {
   this.x = 200;
   this.y = 405;
+};
+
+Player.prototype.character = function() {
+  var chars = ['images/char-cat-girl.png', 'images/char-horn-girl.png', 'images/char-pink-girl.png', 'images/char-princess-girl.png', 'images/char-boy.png'];
+
+  if(charNum != 4) {
+    charNum++;
+  } else {
+    charNum = 0;
+  }
+
+  this.sprite = chars[charNum];
+
 };
 
 //lives class
@@ -191,7 +206,8 @@ document.addEventListener('keyup', function(e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        67: 'c'
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
