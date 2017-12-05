@@ -181,6 +181,8 @@ var Engine = (function(global) {
         });
 
         scores.render();
+
+        star.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -211,7 +213,8 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/small-heart.png',
-        'images/game-over.png'
+        'images/game-over.png',
+        'images/Star.png'
     ]);
     Resources.onReady(init);
 

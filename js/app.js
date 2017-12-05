@@ -124,6 +124,26 @@ Scores.prototype.updateScore = function() {
   }
 };
 
+//add ability to collect extra points
+var Stars = function(x, y) {
+  this.sprite = 'images/Star.png';
+  this.x = x;
+  this.y = y;
+};
+
+Stars.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Stars.prototype.update = function() {
+  var starX = [0, 100, 200, 300, 400];
+  var starY = [240, 155, 70];
+
+  //randomly select an x and y for the star location
+  this.x = starX[Math.floor(Math.random() * (6 - 0)) + 0];
+  this.y = starY[Math.floor(Math.random() * (4 - 0)) + 0];
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -146,6 +166,8 @@ var Newgame = function() {
 
   scores = new Scores();
   currScore = 0;
+
+  star = new Stars(200, 155);
 };
 
 
