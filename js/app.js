@@ -45,7 +45,7 @@ var Player = function(){
 
 Player.prototype.update = function(dt) {
   if(this.x <= -20) {
-    this.x = -20;
+    this.x = -10;
   }
 
   if(this.x >= 410) {
