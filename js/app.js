@@ -145,8 +145,10 @@ Stars.prototype.update = function() {
   var starY = [240, 155, 70];
 
   //randomly select an x and y for the star location
-  this.x = starX[Math.floor(Math.random() * (6 - 0)) + 0];
-  this.y = starY[Math.floor(Math.random() * (4 - 0)) + 0];
+  this.x = starX[Math.floor(Math.random() * (5 - 0)) + 0];
+  this.y = starY[Math.floor(Math.random() * (3 - 0)) + 0];
+
+  console.log(this.x);
 };
 
 // Now instantiate your objects.
