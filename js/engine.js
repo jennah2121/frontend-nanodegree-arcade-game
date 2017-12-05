@@ -104,8 +104,8 @@ var Engine = (function(global) {
     function checkCollisions() {
       allEnemies.forEach(function(enemy) {
         /*
-        First check if the player is on the same row as the enemy subtract 15
-        as player y is always 15 greater than enemy y.
+        First check if the player is on the same row as the enemy
+        then subtract 15 as player y is always 15 greater than enemy y.
         Then check if the players x position is within the range of the enemy's x
         */
         if(player.y - 15 == enemy.y) {
@@ -116,6 +116,11 @@ var Engine = (function(global) {
         }
       });
 
+      /*
+        Determine if the player has collided with a star by first checking if
+        player is in the same column as a star. Then establish if the player
+        is on the same row. 
+      */
       if(player.y + 5 == star.y)  {
         var xVals = [-10, 195, 400, 605, 810];
         if(xVals.includes(player.x + star.x)) {
@@ -149,7 +154,7 @@ var Engine = (function(global) {
             row, col;
 
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that

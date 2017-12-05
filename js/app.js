@@ -1,24 +1,20 @@
+//global variables
 var allEnemies, allLives, currScore=0, highestScore=0, charNum=-1;
 
-// Enemies our player must avoid
+// Enemies class - player must avoid these
+/* Enemy methods:
+*  Update - updates the enemy position. Takes in one parameter(dt) a time delta between ticks
+*  Render - draws the enemy on the screen
+*/
 var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.speed = speed;
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    // movement multipled by dt to ensure the game runs at the same speed on all computers
     this.x += Math.round(this.speed * dt);
 
     if (this.x >= 500) {
@@ -28,14 +24,19 @@ Enemy.prototype.update = function(dt) {
 
 };
 
-// Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+
+//Player class
+/* Player methods:
+*  Update - prevents the player from exiting the game board
+*  handleInput - moves the player, also allows reset and character change funcs to be called
+*  render - draws the player on the screen
+*  reset - returns the player to the starting position
+*  character - changes the player character
+*/
 var Player = function(){
   this.sprite = 'images/char-boy.png';
   this.x = 200;
@@ -43,7 +44,6 @@ var Player = function(){
 };
 
 Player.prototype.update = function(dt) {
-  //prevent player from exiting game board
   if(this.x <= -20) {
     this.x = -20;
   }
@@ -58,8 +58,8 @@ Player.prototype.update = function(dt) {
 
   if(this.y <= -10) {
     this.y = -10;
-    //visually show that the player has reached the water
-    setTimeout( () => this.reset(), 300);
+
+    setTimeout( () => this.reset(), 300);          //visually show that the player has reached the water
     setTimeout( () => scores.updateScore(), 299);
   }
 };
@@ -106,10 +106,12 @@ Player.prototype.character = function() {
   }
 
   this.sprite = chars[charNum];
-
 };
 
-//lives class
+// lives class
+/* Lives methods:
+/* render - draws a life on the screen
+*/
 var Life = function(x) {
   this.sprite = 'images/small-heart.png';
   this.x = x;
@@ -120,7 +122,11 @@ Life.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-//score tracking
+//Scores class
+/* Scores methods:
+*  render - writes the score on the screen
+*  updateScore - updates the score and increases game difficulty.
+*/
 var Scores = function() {
   this.scoreText = 'Score: ';
   this.highScoreText = 'High Score: ';
@@ -139,7 +145,7 @@ Scores.prototype.updateScore = function() {
     star.collected = false;
     star.update();
 
-    //also increase difficulty by spawning an additional enemy if allEnemies less than 15
+    //increase difficulty by spawning an additional enemy if allEnemies less than 15
     if(allEnemies.length <= 15) {
       var enemyYs = [50, 135, 220];
       var eSpeed = Math.round(Math.random() * (60-20) + 20) * Math.round(Math.random() * (6-2) + 2 );
@@ -148,7 +154,12 @@ Scores.prototype.updateScore = function() {
   }
 };
 
-//add ability to collect extra points
+//Stars class
+/* Adds the ability to earn extra points by collecting stars
+*  Stars methods:
+*  render - draws a star on the screen
+*  update - randomly determines the position of the star
+*/
 var Stars = function(x, y) {
   this.sprite = 'images/Star.png';
   this.x = x;
@@ -166,14 +177,11 @@ Stars.prototype.update = function() {
   var starX = [0, 100, 200, 300, 400];
   var starY = [240, 155, 70];
 
-  //randomly select an x and y for the star location
   this.x = starX[Math.floor(Math.random() * (5 - 0)) + 0];
   this.y = starY[Math.floor(Math.random() * (3 - 0)) + 0];
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Instantiate objects.
 //starting state stored in newGame so the game can be reset easily
 var Newgame = function() {
   allEnemies = [];
@@ -198,8 +206,8 @@ var Newgame = function() {
 };
 
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for key presses and sends the keys to the
+// Player.handleInput() method
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         32: 'space',
