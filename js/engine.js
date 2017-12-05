@@ -52,6 +52,11 @@ var Engine = (function(global) {
          */
         lastTime = now;
 
+        //call the game over function if the player has no lives left
+        if(allLives.length==0) {
+          gameOver();
+        }
+
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
@@ -63,7 +68,7 @@ var Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
+        new Newgame();
         lastTime = Date.now();
         main();
     }
@@ -181,7 +186,12 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        // noop   
+    }
+
+    function gameOver() {
+      allEnemies = [];
+      ctx.drawImage(Resources.get('images/game-over.png'), 0, 0);
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -194,7 +204,8 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/small-heart.png'
+        'images/small-heart.png',
+        'images/game-over.png'
     ]);
     Resources.onReady(init);
 
