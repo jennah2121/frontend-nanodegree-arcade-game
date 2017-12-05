@@ -121,6 +121,8 @@ Scores.prototype.render = function() {
 Scores.prototype.updateScore = function() {
   if(player.y == -10) {
     currScore++;
+    star.collected = false;
+    star.update();
   }
 };
 
@@ -129,10 +131,13 @@ var Stars = function(x, y) {
   this.sprite = 'images/Star.png';
   this.x = x;
   this.y = y;
+  this.collected = false;
 };
 
 Stars.prototype.render = function() {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  if(this.collected == false) {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
 };
 
 Stars.prototype.update = function() {
