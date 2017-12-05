@@ -234,3 +234,11 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+//prevent the arrow keys and spacebar from scolling the page
+document.addEventListener('keydown', function(e) {
+  var keys = [32, 37, 38, 39, 40];
+  if(keys.includes(e.keyCode)) {
+    e.preventDefault();
+  }
+});
