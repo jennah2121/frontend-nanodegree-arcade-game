@@ -136,7 +136,7 @@ Scores.prototype.render = function() {
   ctx.font = '22px chalkboard, helvetica';
   ctx.fillStyle = 'black';
 	ctx.fillText(this.scoreText + currScore, 240, 35);
-  ctx.fillText(this.highScoreText + highestScore, 360, 35);
+  ctx.fillText(this.highScoreText + highestScore, 355, 35);
 };
 
 Scores.prototype.updateScore = function() {
