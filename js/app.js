@@ -1,4 +1,4 @@
-var allEnemies, allLives;
+var allEnemies, allLives, currScore=0, highestScore=0;
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -60,6 +60,7 @@ Player.prototype.update = function(dt) {
     this.y = -10;
     //visually show that the player has reached the water
     setTimeout( () => this.reset(), 300);
+    setTimeout( () => scores.updateScore(), 299);
   }
 };
 
@@ -104,7 +105,24 @@ Life.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+//score tracking
+var Scores = function() {
+  this.scoreText = 'Score: ';
+  this.highScoreText = 'High Score: ';
+};
 
+Scores.prototype.render = function() {
+  ctx.font = '22px chalkboard, helvetica';
+  ctx.fillStyle = 'black';
+	ctx.fillText(this.scoreText + currScore, 240, 35);
+  ctx.fillText(this.highScoreText + highestScore, 360, 35);
+};
+
+Scores.prototype.updateScore = function() {
+  if(player.y == -10) {
+    currScore++;
+  }
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -125,6 +143,9 @@ var Newgame = function() {
   for(var j = 0, xVal=0; j < 5; j++, xVal+=35) {
     allLives.push(new Life(xVal));
   }
+
+  scores = new Scores();
+  currScore = 0;
 };
 
 
