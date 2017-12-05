@@ -115,6 +115,15 @@ var Engine = (function(global) {
           }
         }
       });
+
+      if(player.y + 5 == star.y)  {
+        var xVals = [-10, 195, 400, 605, 810];
+        if(xVals.includes(player.x + star.x)) {
+          currScore += 5;
+          star.collected = true;
+          star.update();
+        }
+      }
     }
 
     /* This function initially draws the "game level", it will then call
