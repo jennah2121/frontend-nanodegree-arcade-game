@@ -123,6 +123,13 @@ Scores.prototype.updateScore = function() {
     currScore++;
     star.collected = false;
     star.update();
+
+    //also increase difficulty by spawning an additional enemy if allEnemies less than 15
+    if(allEnemies.length <= 15) {
+      var enemyYs = [50, 135, 220];
+      var eSpeed = Math.round(Math.random() * (60-20) + 20) * Math.round(Math.random() * (6-2) + 2 );
+      allEnemies.push(new Enemy(0, enemyYs[Math.floor(Math.random() * (3 - 0)) + 0], eSpeed));
+    }
   }
 };
 
@@ -147,8 +154,6 @@ Stars.prototype.update = function() {
   //randomly select an x and y for the star location
   this.x = starX[Math.floor(Math.random() * (5 - 0)) + 0];
   this.y = starY[Math.floor(Math.random() * (3 - 0)) + 0];
-
-  console.log(this.x);
 };
 
 // Now instantiate your objects.
