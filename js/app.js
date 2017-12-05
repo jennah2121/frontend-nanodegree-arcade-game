@@ -77,6 +77,9 @@ Player.prototype.handleInput = function(key) {
     case "right":
       this.x += 105;
       break;
+    case "space":
+      Newgame();
+      break;
   }
 
 };
@@ -129,6 +132,7 @@ var Newgame = function() {
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
+        32: 'space',
         37: 'left',
         38: 'up',
         39: 'right',
