@@ -119,11 +119,11 @@ var Engine = (function(global) {
       /*
         Determine if the player has collided with a star by first checking if
         player is in the same column as a star. Then establish if the player
-        is on the same row. 
+        is on the same row.
       */
       if(player.y + 5 == star.y)  {
         var xVals = [-10, 195, 400, 605, 810];
-        if(xVals.includes(player.x + star.x)) {
+        if(xVals.includes(player.x + star.x) && star.collected == false) {
           currScore += 5;
           star.collected = true;
           star.update();
