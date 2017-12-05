@@ -179,6 +179,8 @@ var Engine = (function(global) {
         allLives.forEach(function(life) {
           life.render();
         });
+
+        scores.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -186,12 +188,16 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop   
+        // noop
     }
 
     function gameOver() {
       allEnemies = [];
+      highestScore = currScore;
       ctx.drawImage(Resources.get('images/game-over.png'), 0, 0);
+      ctx.font = '40px chalkboard, arial';
+      ctx.fillStyle = 'white';
+      ctx.fillText(currScore, 240, 560);
     }
 
     /* Go ahead and load all of the images we know we're going to need to
